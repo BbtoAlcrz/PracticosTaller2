@@ -1,6 +1,6 @@
 ﻿namespace Practico2
 {
-    partial class Form1
+    partial class FormularioPequenio
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -43,13 +43,13 @@
             // LNyA
             // 
             this.LNyA.AutoSize = true;
+            this.LNyA.CausesValidation = false;
             this.LNyA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LNyA.Location = new System.Drawing.Point(38, 45);
             this.LNyA.Name = "LNyA";
             this.LNyA.Size = new System.Drawing.Size(140, 16);
             this.LNyA.TabIndex = 0;
             this.LNyA.Text = "Nombre y Apellido:";
-            this.LNyA.Click += new System.EventHandler(this.LNyA_Click);
             // 
             // LNombre
             // 
@@ -74,20 +74,20 @@
             // LDni
             // 
             this.LDni.AutoSize = true;
+            this.LDni.CausesValidation = false;
             this.LDni.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LDni.Location = new System.Drawing.Point(39, 101);
             this.LDni.Name = "LDni";
             this.LDni.Size = new System.Drawing.Size(30, 16);
             this.LDni.TabIndex = 3;
             this.LDni.Text = "DNI";
-            this.LDni.Click += new System.EventHandler(this.label1_Click);
             // 
             // LModificar
             // 
             this.LModificar.AutoSize = true;
             this.LModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LModificar.ForeColor = System.Drawing.Color.Firebrick;
-            this.LModificar.Location = new System.Drawing.Point(219, 45);
+            this.LModificar.Location = new System.Drawing.Point(184, 45);
             this.LModificar.Name = "LModificar";
             this.LModificar.Size = new System.Drawing.Size(71, 16);
             this.LModificar.TabIndex = 4;
@@ -126,6 +126,7 @@
             this.BGuardar.TabIndex = 4;
             this.BGuardar.Text = "Guardar";
             this.BGuardar.UseVisualStyleBackColor = true;
+            this.BGuardar.Click += new System.EventHandler(this.BGuardar_Click);
             // 
             // BEliminar
             // 
@@ -135,8 +136,9 @@
             this.BEliminar.TabIndex = 5;
             this.BEliminar.Text = "Eliminar";
             this.BEliminar.UseVisualStyleBackColor = true;
+            this.BEliminar.Click += new System.EventHandler(this.BEliminar_Click);
             // 
-            // Form1
+            // FormularioPequenio
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Application;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -152,7 +154,7 @@
             this.Controls.Add(this.LApellido);
             this.Controls.Add(this.LNombre);
             this.Controls.Add(this.LNyA);
-            this.Name = "Form1";
+            this.Name = "FormularioPequenio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pequeño Formulario";
             this.ResumeLayout(false);

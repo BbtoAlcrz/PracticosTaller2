@@ -1,0 +1,102 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Practico3
+{
+    public partial class PequeñoFormulario : Form
+    {
+        public PequeñoFormulario()
+        {
+            InitializeComponent();
+        }
+
+        private bool EsTextoValido(string texto)
+        {
+            return !string.IsNullOrWhiteSpace(texto) && texto.All(c => char.IsLetter(c) || char.IsWhiteSpace(c));
+        }
+
+        private void BGuardar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TDni.Text) ||
+                string.IsNullOrWhiteSpace(TApellido.Text) ||
+                string.IsNullOrWhiteSpace(TNombre.Text))
+            {
+                MessageBox.Show("Debe completar todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (!int.TryParse(TDni.Text, out _) || TDni.Text.Length < 7)
+            {
+                MessageBox.Show("El DNI debe ser un número válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (!EsTextoValido(TNombre.Text) || !EsTextoValido(TApellido.Text))
+            {
+                MessageBox.Show("El nombre y/o apellido deben ser cadenas de texto válidas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DialogResult ask = MessageBox.Show("Seguro que desea insertar un nuevo Cliente?", "Confirmar Insercion", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+            if (ask == DialogResult.Yes)
+            {
+                MessageBox.Show($"El Cliente: {TNombre.Text} {TApellido.Text} se insertó Correctamente", "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LModificar.Text = $"{TNombre.Text} {TApellido.Text}";
+            }
+
+        }
+
+        private void BEliminar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TDni.Text) ||
+                string.IsNullOrWhiteSpace(TApellido.Text) ||
+                string.IsNullOrWhiteSpace(TNombre.Text))
+            {
+                MessageBox.Show("No hay nada para eliminar", "Campos vacios", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DialogResult ask = MessageBox.Show($"Está a punto de eliminar al cliente: {TNombre.Text} {TApellido.Text}", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
+            if (ask == DialogResult.Yes)
+            {
+                MessageBox.Show($"El Cliente: {TNombre.Text} {TApellido.Text} se eliminó Correctamente.", "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TNombre.Clear();
+                TApellido.Clear();
+                TDni.Clear();
+                LModificar.Text = string.Empty;
+            }
+        }
+
+        private void BSalir_Click(object sender, EventArgs e)
+        {
+            DialogResult ask = MessageBox.Show("¿Está seguro que desea salir de la aplicación?", "Confirmar Salida", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (ask != DialogResult.Yes)
+            {
+                return;
+            }
+            this.Close();
+        }
+
+        private void ChMujer_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ChMujer.Checked)
+            {
+                ImgPerfil.Image = global::Practico3.Properties.Resources.mujer;
+            }
+        }
+
+        private void ChHombre_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ChHombre.Checked)
+            {
+                ImgPerfil.Image = global::Practico3.Properties.Resources.hombre;
+            }
+        }
+    }
+}
